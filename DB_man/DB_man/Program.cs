@@ -20,11 +20,11 @@ namespace DB_man
             kernel.Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql").WithConstructorArgument("dbName", ""); // bind with argument to instantiate concrete
             kernel.Bind<IDataAccess>().To<CsvAccess>().Named("CSV").WithConstructorArgument("fileName", @"C:\Users\USER\Dev\ELEN4010_DI\test.csv");
 
-            kernel.Bind<IRequestData>().To<GoogleNews>().WhenParentNamed("MultiNewsProvider");
-            kernel.Bind<IRequestData>().To<BBCNews>().WhenParentNamed("MultiNewsProvider");
-            kernel.Bind<IRequestData>().To<MockRequest>().WhenParentNamed("SingleNewsProvider");//.WithConstructorArgument("fileName", @"C:\Users\USER\Dev\ELEN4010_DI\dummyResponse.txt");
-            kernel.Bind<INewsProvider>().To <MultiNewsProvider>();
-            kernel.Bind<INewsProvider>().To<SingleNewsProvider>().Named("Single");
+            kernel.Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>();
+            kernel.Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>();
+            kernel.Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>().WithConstructorArgument("fileName", @"C:\Users\USER\Dev\ELEN4010_DI\dummyResponse.txt");
+            kernel.Bind<INewsProvider>().To <SingleNewsProvider>();
+            //kernel.Bind<INewsProvider>().To<SingleNewsProvider>().Named("Single");
              /* registering - end*/
             var retriever = kernel.Get<DataRetriever>();// can bind to a method which returns concrete type instead of binding to the type
             Console.WriteLine(retriever.getAllEntries());
