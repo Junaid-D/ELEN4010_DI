@@ -89,7 +89,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classifier\ICategoryFinder.cs" />
     <Compile Include="DataAccess\CsvAccess.cs" />
+    <Compile Include="DataAccess\DataRetriever.cs" />
     <Compile Include="DataAccess\IDataAccess.cs" />
     <Compile Include="DataAccess\mockAccess.cs" />
     <Compile Include="Program.cs" />

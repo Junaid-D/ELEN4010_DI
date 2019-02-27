@@ -33,16 +33,20 @@ namespace DB_man.DataAccess
             {
                 using (var reader = new StreamReader(fileName_))
                 {
-                    var line = reader.ReadLine();
-                    res += line;
+                    var line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        
+                        res += line+Environment.NewLine;
+                    }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 //logging
             }
 
-                return res;
+            return res;
         }
 
         public void Update()
