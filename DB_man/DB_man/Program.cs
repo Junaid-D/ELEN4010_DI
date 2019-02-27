@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DataInterfaces;
 using DB_man.DataAccess;
+using DB_man.RequestClasses;
+using DB_man.RequestInterfaces;
 namespace DB_man
 {
     class Program
@@ -15,6 +17,10 @@ namespace DB_man
             Console.WriteLine(d.Read());
             IDataAccess dd = new CsvAccess(@"C:\Users\USER\Dev\ELEN4010_DI\test.csv");
             Console.WriteLine(dd.Read());
+
+            IRequestData web = new WebAPIRequest();
+            Console.WriteLine(web.getRecent());
+            Console.WriteLine("Powered by News API");
             Console.ReadKey();
         }
     }
