@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.OleDb;
 
-namespace DbAccess
+namespace DB_man.DataAccess
 {
 	public class SqlDBAccess: IDataAccess
 	{
@@ -20,15 +20,22 @@ namespace DbAccess
             var res="";
             using (conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\USER\Dev\ELEN4010_DI\testDB.accdb"))
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception e)
+                {
+                }
                 OleDbCommand cmd = new OleDbCommand("Select * FROM tbResponses", conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        foreach (var item in reader)
+                       // var it = reader[2];
+                        for (var i=1;i<reader.VisibleFieldCount;i++)
                         {
-                            res += item.ToString() + ',';
+                            res += reader[i].ToString() + ',';
                         }
                         res += Environment.NewLine;
                     }

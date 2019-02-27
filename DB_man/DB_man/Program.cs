@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataInterfaces;
-using DbAccess;
+using DB_man.DataAccess;
 namespace DB_man
 {
     class Program
@@ -13,6 +13,8 @@ namespace DB_man
         {
             IDataAccess d = new SqlDBAccess("");
             Console.WriteLine(d.Read());
+            IDataAccess dd = new CsvAccess(@"C:\Users\USER\Dev\ELEN4010_DI\test.csv");
+            Console.WriteLine(dd.Read());
             Console.ReadKey();
         }
     }
