@@ -19,7 +19,13 @@ namespace DB_man
             Console.WriteLine(dd.Read());
 
             IRequestData web = new WebAPIRequest();
-            Console.WriteLine(web.getRecent());
+            var newsprovider0 = new NewsProvider(web);
+            var dummyFile = @"C:\Users\USER\Dev\ELEN4010_DI\dummyResponse.txt";
+
+            IRequestData file = new MockRequest(dummyFile);
+            var newsProvider1 = new NewsProvider(file);
+            var res = newsprovider0.GetArticles();
+            res = newsProvider1.GetArticles();
             Console.WriteLine("Powered by News API");
             Console.ReadKey();
         }

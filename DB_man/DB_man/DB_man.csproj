@@ -97,6 +97,8 @@
     <Compile Include="DataAccess\SqlDBAccess.cs" />
     <Compile Include="RequestClasses\ApiResponse.cs" />
     <Compile Include="RequestClasses\IRequestData.cs" />
+    <Compile Include="RequestClasses\MockRequest.cs" />
+    <Compile Include="RequestClasses\NewsProvider.cs" />
     <Compile Include="RequestClasses\WebAPIRequest.cs" />
   </ItemGroup>
   <ItemGroup>

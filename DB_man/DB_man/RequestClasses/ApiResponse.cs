@@ -4,7 +4,7 @@
 //
 //    using NewsResponse;
 //
-//    var apiResponse = ApiResponse.FromJson(jsonString);
+//    var NewsData = NewsData.FromJson(jsonString);
 
 namespace NewsResponse
 {
@@ -15,7 +15,7 @@ namespace NewsResponse
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class ApiResponse
+    public partial class NewsData
     {
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -63,14 +63,14 @@ namespace NewsResponse
         public string Name { get; set; }
     }
 
-    public partial class ApiResponse
+    public partial class NewsData
     {
-        public static ApiResponse FromJson(string json) => JsonConvert.DeserializeObject<ApiResponse>(json, NewsResponse.Converter.Settings);
+        public static NewsData FromJson(string json) => JsonConvert.DeserializeObject<NewsData>(json, NewsResponse.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this ApiResponse self) => JsonConvert.SerializeObject(self, NewsResponse.Converter.Settings);
+        public static string ToJson(this NewsData self) => JsonConvert.SerializeObject(self, NewsResponse.Converter.Settings);
     }
 
     internal static class Converter
