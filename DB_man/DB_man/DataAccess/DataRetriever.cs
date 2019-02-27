@@ -11,7 +11,7 @@ namespace DB_man.DataAccess
     public class DataRetriever
     {
         private IDataAccess access_;
-        public DataRetriever([Named("Sql")]IDataAccess access)
+        public DataRetriever([Named("Sql")]IDataAccess access)//by name injection
         {
             access_ = access;
         }

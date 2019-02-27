@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NewsResponse;
 
-namespace DB_man.Classification
+namespace DB_man.ResponseIntefaces
 {
-   public interface ICategoryFinder
+    public interface INewsProvider
     {
-        List<string> getCategories();
+        List<Article> GetArticles();
     }
 }

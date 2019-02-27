@@ -36,7 +36,6 @@ namespace DB_man.DataAccess
                     var line = "";
                     while ((line = reader.ReadLine()) != null)
                     {
-                        
                         res += line+Environment.NewLine;
                     }
                 }

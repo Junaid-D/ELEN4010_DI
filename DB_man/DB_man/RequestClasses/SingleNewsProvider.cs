@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using DB_man.RequestInterfaces;
 using NewsResponse;
+using DB_man.ResponseIntefaces;
 namespace DB_man.RequestClasses
 {
 
-    public class NewsProvider
+    public class SingleNewsProvider:INewsProvider
     {
         private IRequestData requester_;
 
-        public NewsProvider(IRequestData data)
+        public SingleNewsProvider(IRequestData data)
         {
             requester_ = data;
         }
