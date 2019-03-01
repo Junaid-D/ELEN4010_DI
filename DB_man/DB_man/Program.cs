@@ -23,12 +23,14 @@ namespace DB_man
             kernel.Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>();
             kernel.Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>();//conditional based on the class being injected into
             kernel.Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>().WithConstructorArgument("fileName", @"C:\Users\USER\Dev\ELEN4010_DI\dummyResponse.txt");
-            kernel.Bind<INewsProvider>().To <SingleNewsProvider>();
+            kernel.Bind<INewsProvider>().To<SingleNewsProvider>();
 
 
+            //storing 
             kernel.Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<MultiStoreSaver>().WithConstructorArgument("dbName", "");
             kernel.Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>().WithConstructorArgument("fileName", @"C:\Users\USER\Dev\ELEN4010_DI\test.csv");
-            kernel.Bind<IDataAccess>().To<mockAccess>().WhenInjectedInto<SingleStoreSaver>();
+            kernel.Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>().WithConstructorArgument("dbName", ""); ;
+            kernel.Bind<IResponseSaver>().To<SingleStoreSaver>();
             /* registering - end*/
             var retriever = kernel.Get<DataRetriever>();// can bind to a method which returns concrete type instead of binding to the type
             Console.WriteLine(retriever.getAllEntries());
@@ -44,13 +46,21 @@ namespace DB_man
             ///
 
             var newsProvider1 = kernel.Get<INewsProvider>();
+
             var res = newsProvider1.GetArticles();
             res = newsProvider1.GetArticles();
+
+            var responseStorer = kernel.Get<IResponseSaver>();
+            responseStorer.saveData(newsProvider1.GetArticles());
+
 
             foreach (var article in res)
             {
                 Console.WriteLine(article.Content);
             }
+
+
+
             Console.WriteLine("News Powered by News API");
             Console.ReadKey();
         }

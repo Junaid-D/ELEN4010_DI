@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataInterfaces;
 using System.IO;
+using NewsResponse;
 
 namespace DB_man.DataAccess
 {
@@ -16,7 +17,8 @@ namespace DB_man.DataAccess
         {
             fileName_ = fileName;
         }
-        public void Create()
+
+        public void Create(List<Article> articles)
         {
             throw new NotImplementedException();
         }

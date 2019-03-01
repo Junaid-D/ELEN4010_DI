@@ -10,18 +10,15 @@ namespace DB_man.DataAccess
     class SingleStoreSaver : IResponseSaver
     {
         private IDataAccess acc_;
-        
+
         public SingleStoreSaver(IDataAccess acc)
         {
             acc_ = acc;
         }
 
-        public void saveData(List<NewsData> toSave)
+        public void saveData(List<Article> toSave)
         {
-            foreach (var item in toSave)
-            {
-                acc_.Create();
-            }
+            acc_.Create(toSave);
         }
     }
 }

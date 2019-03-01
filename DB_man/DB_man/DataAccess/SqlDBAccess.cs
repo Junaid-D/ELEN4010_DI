@@ -3,13 +3,15 @@ using DataInterfaces;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.OleDb;
+using NewsResponse;
+using System.Collections.Generic;
 
 namespace DB_man.DataAccess
 {
-	public class SqlDBAccess: IDataAccess
-	{
+    public class SqlDBAccess : IDataAccess
+    {
         private string dbName_;
-        private OleDbConnection conn=null;
+        private OleDbConnection conn = null;
         public SqlDBAccess(string dbName)
         {
             dbName_ = dbName;
@@ -17,7 +19,7 @@ namespace DB_man.DataAccess
 
         public string Read()
         {
-            var res="";
+            var res = "";
             using (conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\USER\Dev\ELEN4010_DI\testDB.accdb"))
             {
                 try
@@ -32,8 +34,8 @@ namespace DB_man.DataAccess
                 {
                     while (reader.Read())
                     {
-                       // var it = reader[2];
-                        for (var i=1;i<reader.VisibleFieldCount;i++)
+                        // var it = reader[2];
+                        for (var i = 1; i < reader.VisibleFieldCount; i++)
                         {
                             res += reader[i].ToString() + ',';
                         }
@@ -41,14 +43,11 @@ namespace DB_man.DataAccess
                     }
 
                 }
-
+                conn.Close();
             }
-            return res;
-        }
 
-        public void Create()
-        {
-            throw new NotImplementedException();
+           
+            return res;
         }
 
         public void Update()
@@ -59,6 +58,30 @@ namespace DB_man.DataAccess
         public void Delete()
         {
             throw new NotImplementedException();
+        }
+
+        public void Create(List<Article> articles)
+        {
+            using (conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\USER\Dev\ELEN4010_DI\testDB.accdb"))
+            {
+
+                OleDbCommand cmd = new OleDbCommand("Insert into NewsResponses ([Time],[Content]) values(?,?)", conn);
+                foreach (var toStore in articles)
+                {
+                    cmd.Parameters.AddWithValue("@Time", DateTime.Now.TimeOfDay);
+                    cmd.Parameters.AddWithValue("@Body", toStore.Content);
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
+                
+            }
         }
     }
 }

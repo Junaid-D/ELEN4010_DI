@@ -17,13 +17,12 @@ namespace DB_man.DataAccess
             acc_ = acc;
         }
 
-        public void saveData(List<NewsData> toSave)
+        public void saveData(List<Article> toSave)
         {
-            foreach (var item in toSave)
-            {
-                foreach (IDataAccess dataStore in acc_)
-                    dataStore.Create();
-            }
+
+            foreach (IDataAccess dataStore in acc_)
+                dataStore.Create(toSave);
+
         }
     }
 }

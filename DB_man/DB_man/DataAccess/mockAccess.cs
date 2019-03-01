@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataInterfaces;
+using NewsResponse;
+
 namespace DB_man.DataAccess
 {
     class mockAccess : IDataAccess
     {
-        public void Create()
+
+        public void Create(List<Article> articles)
         {
             throw new NotImplementedException();
         }

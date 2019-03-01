@@ -9,6 +9,6 @@ namespace DB_man.DataAccess
 {
     interface IResponseSaver
     {
-        void saveData(List<NewsData> toSave);
+        void saveData(List<Article> toSave);
     }
 }
