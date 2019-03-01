@@ -23,9 +23,16 @@ namespace DB_man.RequestClasses
             foreach(IRequestData reqData in requesters_)
             {
                 var jsonString = reqData.getRecent();
-                var deserialised = NewsData.FromJson(jsonString);
-                res.AddRange(deserialised.Articles);
+                try
+                {
+                    var deserialised = NewsData.FromJson(jsonString);
+                    res.AddRange(deserialised.Articles);
 
+                }
+                catch(Exception e)
+                {
+
+                }
             }
             return res;
         }

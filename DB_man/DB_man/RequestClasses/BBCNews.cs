@@ -18,7 +18,15 @@ namespace DB_man.RequestClasses
         public string getRecent()
         {
             var url = endpoint+ "&apiKey=" + key;
-            var json = new WebClient().DownloadString(url);
+            var json = "";
+            try
+            {
+                json = new WebClient().DownloadString(url);
+            }
+            catch (Exception e)
+            {
+
+            }
             return json;
         }
     }

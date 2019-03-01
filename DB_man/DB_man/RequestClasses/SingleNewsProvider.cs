@@ -23,8 +23,14 @@ namespace DB_man.RequestClasses
             var res = new List<Article>();
 
             var newsResponse = requester_.getRecent();
-            res = NewsData.FromJson(newsResponse).Articles;
+            try
+            {
+                res = NewsData.FromJson(newsResponse).Articles;
+            }
+            catch (Exception e)
+            {
 
+            }
             return res;
         }
     }

@@ -12,8 +12,16 @@ namespace DB_man.RequestClasses
         private string url= @"https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=a9b990aa16c74b62a791bda84927c8d6";
         public string getRecent()
         {
-            var json = new WebClient().DownloadString(url);
-            return json;
+            var json = "";
+            try
+            {
+                json = new WebClient().DownloadString(url);
+            }
+            catch (Exception e)
+            {
+
+            }
+                return json;
         }
     }
 }
