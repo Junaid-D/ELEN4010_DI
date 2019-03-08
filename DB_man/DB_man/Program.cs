@@ -9,6 +9,9 @@ using DB_man.RequestClasses;
 using DB_man.RequestInterfaces;
 using Ninject;
 using DB_man.ResponseIntefaces;
+using DB_man.Classification;
+
+
 namespace DB_man
 {
     class Program
@@ -31,6 +34,11 @@ namespace DB_man
             kernel.Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>().WithConstructorArgument("fileName", @"C:\Users\USER\Dev\ELEN4010_DI\test.csv");
             kernel.Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>().WithConstructorArgument("dbName", ""); ;
             kernel.Bind<IResponseSaver>().To<SingleStoreSaver>();
+
+
+            //analytics
+            kernel.Bind<ICategoryFinder>().To<AzureCategoryFinder>();
+
             /* registering - end*/
             var retriever = kernel.Get<DataRetriever>();// can bind to a method which returns concrete type instead of binding to the type
             Console.WriteLine(retriever.getAllEntries());
@@ -59,6 +67,9 @@ namespace DB_man
                 Console.WriteLine(article.Content);
             }
 
+            var analyser = kernel.Get<ICategoryFinder>();
+
+            var listKeywords = analyser.getCategories(res.Select(article=>article.Content).ToList<string>());
 
 
             Console.WriteLine("News Powered by News API");

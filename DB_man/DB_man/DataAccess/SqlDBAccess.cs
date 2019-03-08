@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using NewsResponse;
 using System.Collections.Generic;
-
 namespace DB_man.DataAccess
 {
     public class SqlDBAccess : IDataAccess
@@ -20,7 +19,7 @@ namespace DB_man.DataAccess
         public string Read()
         {
             var res = "";
-            using (conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\USER\Dev\ELEN4010_DI\testDB.accdb"))
+            using (conn = new OleDbConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Default"].ConnectionString ))
             {
                 try
                 {
@@ -28,6 +27,7 @@ namespace DB_man.DataAccess
                 }
                 catch (Exception e)
                 {
+
                 }
                 OleDbCommand cmd = new OleDbCommand("Select * FROM tbResponses", conn);
                 using (var reader = cmd.ExecuteReader())
