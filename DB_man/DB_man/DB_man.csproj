@@ -103,6 +103,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules.cs" />
     <Compile Include="Classifier\AzureCategoryFinder.cs" />
     <Compile Include="Classifier\ICategoryFinder.cs" />
     <Compile Include="DataAccess\CsvAccess.cs" />

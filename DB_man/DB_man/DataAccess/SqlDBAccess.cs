@@ -9,11 +9,9 @@ namespace DB_man.DataAccess
 {
     public class SqlDBAccess : IDataAccess
     {
-        private string dbName_;
         private OleDbConnection conn = null;
-        public SqlDBAccess(string dbName)
+        public SqlDBAccess()
         {
-            dbName_ = dbName;
         }
 
         public string Read()

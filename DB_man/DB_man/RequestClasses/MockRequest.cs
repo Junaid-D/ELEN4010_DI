@@ -10,9 +10,9 @@ namespace DB_man.RequestClasses
     class MockRequest : IRequestData
     {
         private string file_;
-        public MockRequest(string fileName)
+        public MockRequest()
         {
-            file_ = fileName;
+            file_ = System.Configuration.ConfigurationManager.ConnectionStrings["MockResponse"].ConnectionString;
         }
 
         public string getRecent()

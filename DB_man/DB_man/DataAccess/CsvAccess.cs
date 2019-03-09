@@ -13,9 +13,9 @@ namespace DB_man.DataAccess
     {
         private string fileName_;
 
-        public CsvAccess(string fileName)
+        public CsvAccess()
         {
-            fileName_ = fileName;
+            fileName_ = System.Configuration.ConfigurationManager.ConnectionStrings["CSV"].ConnectionString;
         }
 
         public void Create(List<Article> articles)
