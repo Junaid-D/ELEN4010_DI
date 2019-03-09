@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
 using DataInterfaces;
 using DB_man.DataAccess;
-using DB_man.RequestClasses;
-using DB_man.RequestInterfaces;
 using Ninject;
 using DB_man.ResponseIntefaces;
 using DB_man.Classification;
 
+using Ninject.Extensions.Interception;
+using Ninject.Extensions.Interception.Infrastructure.Language;
 
 namespace DB_man
 {
@@ -28,6 +30,9 @@ namespace DB_man
         static void Main(string[] args)
         {
             IKernel kernel = DefaultConfigure();
+
+
+
             var retriever = kernel.Get<DataRetriever>();// can bind to a method which returns concrete type instead of binding to the type
             Console.WriteLine(retriever.getAllEntries());
 

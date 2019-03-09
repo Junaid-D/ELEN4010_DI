@@ -10,6 +10,7 @@ using DB_man.RequestClasses;
 using DB_man.RequestInterfaces;
 using DB_man.ResponseIntefaces;
 using Ninject;
+using Ninject.Extensions.Interception.Infrastructure.Language;
 using Ninject.Modules;
 
 namespace DB_man
@@ -21,7 +22,7 @@ namespace DB_man
             Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>();
             Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>();//conditional based on the class being injected into
             Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>();
-            Bind<INewsProvider>().To<SingleNewsProvider>();
+            Bind<INewsProvider>().To<SingleNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>(); 
 
         }
     }
@@ -34,8 +35,8 @@ namespace DB_man
             Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>();
             Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>();
             Bind<IResponseSaver>().To<SingleStoreSaver>();
-            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql");// bind with argument to instantiate concrete
-            Bind<IDataAccess>().To<CsvAccess>().Named("CSV");
+            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql");
+            Bind<IDataAccess>().To<CsvAccess>().Named("CSV").Intercept(context => true).With<ExceptionInterceptor>(); ;
 
         }
     }
