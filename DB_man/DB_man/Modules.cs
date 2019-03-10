@@ -22,7 +22,7 @@ namespace DB_man
             Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>();
             Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>();//conditional based on the class being injected into
             Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>();
-            Bind<INewsProvider>().To<SingleNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>(); 
+            Bind<INewsProvider>().To<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>(); 
 
         }
     }
@@ -35,8 +35,8 @@ namespace DB_man
             Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>();
             Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>();
             Bind<IResponseSaver>().To<SingleStoreSaver>();
-            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql");
-            Bind<IDataAccess>().To<CsvAccess>().Named("CSV").Intercept(context => true).With<ExceptionInterceptor>(); ;
+            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql").Intercept(context => true).With<ExceptionInterceptor>(); ;
+            Bind<IDataAccess>().To<CsvAccess>().Named("CSV").Intercept(context => true).With<ExceptionInterceptor>(); 
 
         }
     }
@@ -45,7 +45,7 @@ namespace DB_man
     {
         public override void Load()
         {
-            Bind<ICategoryFinder>().To<AzureCategoryFinder>();
+            Bind<ICategoryFinder>().To<AzureCategoryFinder>().Intercept(context => true).With<ExceptionInterceptor>(); ;
         }
     }
 }

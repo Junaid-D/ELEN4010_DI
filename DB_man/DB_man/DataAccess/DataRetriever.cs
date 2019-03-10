@@ -21,10 +21,10 @@ namespace DB_man.DataAccess
             access_ = acc;
         }
 
-        public string getAllEntries()
+        public List<string> getAllEntries()
         {
-            var res = "";
-            res = access_.Read();
+            List<string> res = new List<string>();
+            res = access_.Read().Split(',').ToList();
             return res;
         }
     }

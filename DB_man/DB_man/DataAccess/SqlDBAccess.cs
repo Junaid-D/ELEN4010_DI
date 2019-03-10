@@ -17,17 +17,13 @@ namespace DB_man.DataAccess
         public string Read()
         {
             var res = "";
-            using (conn = new OleDbConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Default"].ConnectionString ))
+            using (conn = new OleDbConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Default"].ConnectionString))
             {
-                try
-                {
-                    conn.Open();
-                }
-                catch (Exception e)
-                {
 
-                }
-                OleDbCommand cmd = new OleDbCommand("Select * FROM tbResponses", conn);
+                conn.Open();
+
+
+                OleDbCommand cmd = new OleDbCommand("Select TOP 15 * FROM tbNewsResponses ORDER BY Time", conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -44,7 +40,7 @@ namespace DB_man.DataAccess
                 conn.Close();
             }
 
-           
+
             return res;
         }
 
@@ -60,25 +56,26 @@ namespace DB_man.DataAccess
 
         public void Create(List<Article> articles)
         {
-            using (conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\USER\Dev\ELEN4010_DI\testDB.accdb"))
+            using (conn = new OleDbConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Default"].ConnectionString))
             {
 
-                OleDbCommand cmd = new OleDbCommand("Insert into NewsResponses ([Time],[Content]) values(?,?)", conn);
+                OleDbCommand cmd = new OleDbCommand("Insert into tbNewsResponses ([Time],[Content]) values(?,?)", conn);
                 foreach (var toStore in articles)
                 {
                     cmd.Parameters.AddWithValue("@Time", DateTime.Now.TimeOfDay);
-                    cmd.Parameters.AddWithValue("@Body", toStore.Content);
+                    cmd.Parameters.AddWithValue("@Content", toStore.Content);
                     try
                     {
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Close();
+                        cmd.Parameters.Clear();
                     }
                     catch (Exception e)
                     {
                     }
                 }
-                
+
             }
         }
     }

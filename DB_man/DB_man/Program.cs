@@ -33,36 +33,27 @@ namespace DB_man
 
 
 
-            var retriever = kernel.Get<DataRetriever>();// can bind to a method which returns concrete type instead of binding to the type
-            Console.WriteLine(retriever.getAllEntries());
-
-            retriever.modifyAcces(kernel.Get<IDataAccess>("CSV"));
-            Console.WriteLine(retriever.getAllEntries());
-
-
-
-        //    var newsprovider0 = kernel.Get<INewsProvider>("Single");
-           
-          
-            ///
-
+            var retriever = kernel.Get<DataRetriever>();
             var newsProvider1 = kernel.Get<INewsProvider>();
 
+            Console.WriteLine("Retrieving Stories...");
             var res = newsProvider1.GetArticles();
-            res = newsProvider1.GetArticles();
+            Console.WriteLine("Done Fetching");
 
+            Console.WriteLine("Saving Stories...");
             var responseStorer = kernel.Get<IResponseSaver>();
-            responseStorer.saveData(newsProvider1.GetArticles());
+            responseStorer.saveData(res);
+            Console.WriteLine("Done Saving");
 
-
-            foreach (var article in res)
-            {
-                Console.WriteLine(article.Content);
-            }
-
+            Console.WriteLine("Retrieving Stories from persistent store...");
+            var storedStories = retriever.getAllEntries();
+            Console.WriteLine("Analysing For Categories");
             var analyser = kernel.Get<ICategoryFinder>();
-
-            var listKeywords = analyser.getCategories(res.Select(article=>article.Content).ToList<string>());
+            var listKeywords = analyser.getCategories(storedStories);
+            foreach(var item in listKeywords)
+            {
+                Console.WriteLine("Keyword Found: {0}", item);
+            }
 
 
             Console.WriteLine("News Powered by News API");
