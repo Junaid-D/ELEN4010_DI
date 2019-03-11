@@ -62,17 +62,20 @@ namespace DB_man.DataAccess
                 OleDbCommand cmd = new OleDbCommand("Insert into tbNewsResponses ([Time],[Content]) values(?,?)", conn);
                 foreach (var toStore in articles)
                 {
-                    cmd.Parameters.AddWithValue("@Time", DateTime.Now.TimeOfDay);
-                    cmd.Parameters.AddWithValue("@Content", toStore.Content);
-                    try
+                    if (toStore.Content != null)
                     {
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-                        cmd.Parameters.Clear();
-                    }
-                    catch (Exception e)
-                    {
+                        cmd.Parameters.AddWithValue("@Time", DateTime.Now.TimeOfDay);
+                        cmd.Parameters.AddWithValue("@Content", toStore.Content);
+                        try
+                        {
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                            cmd.Parameters.Clear();
+                        }
+                        catch (Exception e)
+                        {
+                        }
                     }
                 }
 

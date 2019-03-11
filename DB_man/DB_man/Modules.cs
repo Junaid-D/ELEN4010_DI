@@ -19,8 +19,8 @@ namespace DB_man
     {
         public override void Load()
         {
-            Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>();
-            Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>();//conditional based on the class being injected into
+            Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>();
             Bind<INewsProvider>().To<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>(); 
 
