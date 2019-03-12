@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataClasses;
 using DataInterfaces;
 using NewsResponse;
 
@@ -21,7 +22,7 @@ namespace DB_man.DataAccess
             throw new NotImplementedException();
         }
 
-        public string Read()
+        public List<StoredArticle> Read()
         {
             throw new NotImplementedException();
         }

@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using NewsResponse;
 using System.Collections.Generic;
+using DataClasses;
+
 namespace DB_man.DataAccess
 {
     public class SqlDBAccess : IDataAccess
@@ -14,9 +16,9 @@ namespace DB_man.DataAccess
         {
         }
 
-        public string Read()
+        public List<StoredArticle> Read()
         {
-            var res = "";
+            List<StoredArticle> res = new List<StoredArticle>();
             using (conn = new OleDbConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Default"].ConnectionString))
             {
 
@@ -28,12 +30,14 @@ namespace DB_man.DataAccess
                 {
                     while (reader.Read())
                     {
-                        // var it = reader[2];
-                        for (var i = 1; i < reader.VisibleFieldCount; i++)
+                        res.Add(new StoredArticle()
                         {
-                            res += reader[i].ToString() + ',';
-                        }
-                        res += Environment.NewLine;
+                            Id = Convert.ToInt32(reader["ID"]),
+                            Time = Convert.ToDateTime(reader["Time"]),
+                            Content = Convert.ToString(reader["Content"])
+
+                        });
+
                     }
 
                 }

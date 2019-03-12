@@ -11,13 +11,11 @@ namespace DB_man.RequestClasses
 {
     public class BBCNews : IRequestData
     {
-        private string key = "a9b990aa16c74b62a791bda84927c8d6";
         private string endpoint = "https://newsapi.org/v2/top-headlines?sources=bbc-news";
-       // private string country = "&country=us&";
         //https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=a9b990aa16c74b62a791bda84927c8d6
         public string getRecent()
         {
-            var url = endpoint+ "&apiKey=" + key;
+            var url = endpoint + "&apiKey=" + System.Configuration.ConfigurationManager.AppSettings["NewsKey"].ToString();
             var json = "";
             try
             {

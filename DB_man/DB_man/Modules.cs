@@ -31,11 +31,11 @@ namespace DB_man
     {
         public override void Load()
         {
-            Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<MultiStoreSaver>();
-            Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>();
-            Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>();
-            Bind<IResponseSaver>().To<SingleStoreSaver>();
-            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql").Intercept(context => true).With<ExceptionInterceptor>(); ;
+            Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<MultiStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<IResponseSaver>().To<MultiStoreSaver>();
+            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql").Intercept(context => true).With<ExceptionInterceptor>(); 
             Bind<IDataAccess>().To<CsvAccess>().Named("CSV").Intercept(context => true).With<ExceptionInterceptor>(); 
 
         }

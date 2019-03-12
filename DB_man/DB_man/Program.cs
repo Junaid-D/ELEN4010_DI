@@ -32,24 +32,24 @@ namespace DB_man
             IKernel kernel = DefaultConfigure();
 
 
-
-            var retriever = kernel.Get<DataRetriever>();
             var newsProvider1 = kernel.Get<INewsProvider>();
 
             Console.WriteLine("Retrieving Stories...");
-            var res = newsProvider1.GetArticles();
+            var apiRes = newsProvider1.GetArticles();
             Console.WriteLine("Done Fetching");
 
             Console.WriteLine("Saving Stories...");
             var responseStorer = kernel.Get<IResponseSaver>();
-            responseStorer.saveData(res);
+            responseStorer.saveData(apiRes);
             Console.WriteLine("Done Saving");
 
             Console.WriteLine("Retrieving Stories from persistent store...");
+
+            var retriever = kernel.Get<DataRetriever>();
             var storedStories = retriever.getAllEntries();
             Console.WriteLine("Analysing For Categories");
             var analyser = kernel.Get<ICategoryFinder>();
-            var listKeywords = analyser.getCategories(storedStories);
+            var listKeywords = analyser.getCategories(storedStories.Select(res=> res.Content).ToList());
             foreach(var item in listKeywords)
             {
                 Console.WriteLine("Keyword Found: {0}", item);

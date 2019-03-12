@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataClasses;
 using DataInterfaces;
 using Ninject;
 
@@ -11,7 +12,7 @@ namespace DB_man.DataAccess
     public class DataRetriever
     {
         private IDataAccess access_;
-        public DataRetriever([Named("Sql")]IDataAccess access)//by name injection
+        public DataRetriever([Named("CSV")]IDataAccess access)//by name injection
         {
             access_ = access;
         }
@@ -21,10 +22,10 @@ namespace DB_man.DataAccess
             access_ = acc;
         }
 
-        public List<string> getAllEntries()
+        public List<StoredArticle> getAllEntries()
         {
-            List<string> res = new List<string>();
-            res = access_.Read().Split(',').ToList();
+            List<StoredArticle> res = new List<StoredArticle>();
+            res = access_.Read();
             return res;
         }
     }
