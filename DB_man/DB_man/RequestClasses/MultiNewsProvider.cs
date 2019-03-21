@@ -20,7 +20,7 @@ namespace DB_man.RequestClasses
         public List<Article> GetArticles()
         {
             List<Article> res = new List<Article>();
-            foreach(IRequestData reqData in requesters_)
+            foreach (IRequestData reqData in requesters_)
             {
                 var jsonString = reqData.getRecent();
                 try
@@ -29,7 +29,7 @@ namespace DB_man.RequestClasses
                     res.AddRange(deserialised.Articles);
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
 
                 }

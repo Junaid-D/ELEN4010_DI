@@ -112,6 +112,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IDataRetriever.cs" />
     <Compile Include="DataAccess\StoredArticle.cs" />
     <Compile Include="ExceptionInterceptor.cs" />
     <Compile Include="Modules.cs" />

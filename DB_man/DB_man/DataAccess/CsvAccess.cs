@@ -70,7 +70,7 @@ namespace DB_man.DataAccess
             }
             catch (Exception e)
             {
-                
+
             }
 
             return res;

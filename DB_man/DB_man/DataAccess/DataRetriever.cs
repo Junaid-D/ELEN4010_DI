@@ -9,10 +9,10 @@ using Ninject;
 
 namespace DB_man.DataAccess
 {
-    public class DataRetriever
+    public class SimpleDataRetriever:IDataRetriever
     {
         private IDataAccess access_;
-        public DataRetriever([Named("CSV")]IDataAccess access)//by name injection
+        public SimpleDataRetriever([Named("CSV")]IDataAccess access)//by name injection
         {
             access_ = access;
         }

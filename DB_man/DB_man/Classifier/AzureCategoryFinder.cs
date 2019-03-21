@@ -7,6 +7,11 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
+//
+//as per the Microsoft tutorial
+//https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/csharp
+//
+
 namespace DB_man.Classification
 {
 
@@ -30,16 +35,14 @@ namespace DB_man.Classification
             ITextAnalyticsClient client = new TextAnalyticsClient(new ApiKeyServiceClientCredentials())
             {
                 Endpoint = "https://centralus.api.cognitive.microsoft.com"
-            }; //Replace 'westus' with the correct region for your Text Analytics subscription
-
-
+            }; 
 
             var inputList = new List<MultiLanguageInput>();
 
             int i = 1;
-            foreach(string s in inputData)
+            foreach (string s in inputData)
             {
-                inputList.Add(new MultiLanguageInput("en",i.ToString(), s));
+                inputList.Add(new MultiLanguageInput("en", i.ToString(), s));
                 i++;
 
             }
@@ -56,7 +59,7 @@ namespace DB_man.Classification
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }

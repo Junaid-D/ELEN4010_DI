@@ -9,7 +9,7 @@ using DB_man.ResponseIntefaces;
 namespace DB_man.RequestClasses
 {
 
-    public class SingleNewsProvider:INewsProvider
+    public class SingleNewsProvider : INewsProvider
     {
         private IRequestData requester_;
 

@@ -13,19 +13,19 @@ namespace DB_man
     {
         public ExceptionInterceptor()
         {
-           
+
         }
 
         public void Intercept(IInvocation invocation)
         {
             var filePath = System.Configuration.ConfigurationManager.AppSettings["DefLog"];
 
-            if(invocation.Request.Target.GetType().GetInterfaces().Contains(typeof(IRequestData)))
+            if (invocation.Request.Target.GetType().GetInterfaces().Contains(typeof(IRequestData)))
             {
                 using (StreamWriter writer = File.AppendText(filePath))
                 {
-                    
-                    writer.WriteLine("Api Request made in {0} with API Key {1}, at Time: {2}", invocation.Request.Target.GetType().ToString(), 
+
+                    writer.WriteLine("Api Request made in {0} with API Key {1}, at Time: {2}", invocation.Request.Target.GetType().ToString(),
                         System.Configuration.ConfigurationManager.AppSettings["NewsKey"],
                         DateTime.Now.ToString());
                 }

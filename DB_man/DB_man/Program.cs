@@ -21,9 +21,7 @@ namespace DB_man
 
         static IKernel DefaultConfigure()
         {
-
             return new StandardKernel(new NewsModule(), new DataAccessModule(), new AnalyticsModule());
-
 
         }
 
@@ -38,6 +36,15 @@ namespace DB_man
             var apiRes = newsProvider1.GetArticles();
             Console.WriteLine("Done Fetching");
 
+            Console.WriteLine("Printing Stories...");
+            foreach (var item in apiRes)
+            {
+                Console.WriteLine("Story fetched: {0}", item.Content);
+            }
+
+            Console.WriteLine("Done Printing");
+
+
             Console.WriteLine("Saving Stories...");
             var responseStorer = kernel.Get<IResponseSaver>();
             responseStorer.saveData(apiRes);
@@ -45,12 +52,12 @@ namespace DB_man
 
             Console.WriteLine("Retrieving Stories from persistent store...");
 
-            var retriever = kernel.Get<DataRetriever>();
+            var retriever = kernel.Get<IDataRetriever>();
             var storedStories = retriever.getAllEntries();
             Console.WriteLine("Analysing For Categories");
             var analyser = kernel.Get<ICategoryFinder>();
-            var listKeywords = analyser.getCategories(storedStories.Select(res=> res.Content).ToList());
-            foreach(var item in listKeywords)
+            var listKeywords = analyser.getCategories(storedStories.Select(res => res.Content).ToList());
+            foreach (var item in listKeywords)
             {
                 Console.WriteLine("Keyword Found: {0}", item);
             }

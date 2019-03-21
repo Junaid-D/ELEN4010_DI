@@ -15,14 +15,14 @@ using Ninject.Modules;
 
 namespace DB_man
 {
-    public class NewsModule: NinjectModule
+    public class NewsModule : NinjectModule
     {
         public override void Load()
         {
             Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>();
-            Bind<INewsProvider>().To<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>(); 
+            Bind<INewsProvider>().To<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
 
         }
     }
@@ -35,8 +35,9 @@ namespace DB_man
             Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<MultiStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IResponseSaver>().To<MultiStoreSaver>();
-            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql").Intercept(context => true).With<ExceptionInterceptor>(); 
-            Bind<IDataAccess>().To<CsvAccess>().Named("CSV").Intercept(context => true).With<ExceptionInterceptor>(); 
+            Bind<IDataAccess>().To<SqlDBAccess>().Named("Sql").Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<IDataAccess>().To<CsvAccess>().Named("CSV").Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<IDataRetriever>().To<SimpleDataRetriever>();
 
         }
     }

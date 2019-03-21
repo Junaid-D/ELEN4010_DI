@@ -8,8 +8,8 @@ using DB_man.RequestInterfaces;
 namespace DB_man.RequestClasses
 {
     class GoogleNews : IRequestData
-    { 
-        private string endpoint= @"https://newsapi.org/v2/top-headlines?sources=google-news";
+    {
+        private string endpoint = @"https://newsapi.org/v2/top-headlines?sources=google-news";
         public string getRecent()
         {
             var json = "";
@@ -22,7 +22,7 @@ namespace DB_man.RequestClasses
             {
 
             }
-                return json;
+            return json;
         }
     }
 }

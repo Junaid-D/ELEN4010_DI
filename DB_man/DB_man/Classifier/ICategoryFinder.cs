@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DB_man.Classification
 {
-   public interface ICategoryFinder
+    public interface ICategoryFinder
     {
         List<string> getCategories(List<string> inputData);
     }
