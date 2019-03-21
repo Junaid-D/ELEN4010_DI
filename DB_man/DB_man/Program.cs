@@ -46,7 +46,7 @@ namespace DB_man
 
 
             Console.WriteLine("Saving Stories...");
-            var responseStorer = kernel.Get<IResponseSaver>();
+            var responseStorer = kernel.Get<IResponseSaver>("Multi");
             responseStorer.saveData(apiRes);
             Console.WriteLine("Done Saving");
 

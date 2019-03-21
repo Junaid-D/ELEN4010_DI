@@ -9,7 +9,7 @@ using NewsResponse;
 
 namespace DB_man.DataAccess
 {
-    class mockAccess : IDataAccess
+    class MockAccess : IDataAccess
     {
 
         public void Create(List<Article> articles)
