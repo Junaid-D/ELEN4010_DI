@@ -51,7 +51,7 @@ namespace DB_man
             else
             {
                 Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<SingleStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
-                Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SimpleDataRetriever>().Intercept(context => true).With<ExceptionInterceptor>();
+                Bind<IDataAccess>().To<CsvAccess>().WhenInjectedInto<SimpleDataRetriever>().Intercept(context => true).With<ExceptionInterceptor>();
             }
 
         }
