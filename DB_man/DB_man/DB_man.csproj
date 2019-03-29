@@ -130,7 +130,6 @@
     <Compile Include="DataAccess\SqlDBAccess.cs" />
     <Compile Include="RequestClasses\GoogleNews.cs" />
     <Compile Include="RequestClasses\INewsProvider.cs" />
-    <Compile Include="RequestClasses\IResponseData.cs" />
     <Compile Include="RequestClasses\MultiNewsProvider.cs" />
     <Compile Include="RequestClasses\NewsApiResponse.cs" />
     <Compile Include="RequestClasses\IRequestData.cs" />

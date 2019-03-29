@@ -22,7 +22,7 @@ namespace DB_man
 
             if (invocation.Request.Target.GetType().GetInterfaces().Contains(typeof(IRequestData)))
             {
-                using (StreamWriter writer = File.AppendText(filePath))
+                using (StreamWriter writer = File.AppendText(filePath))//log API requests
                 {
 
                     writer.WriteLine("Api Request made in {0} with API Key {1}, at Time: {2}", invocation.Request.Target.GetType().ToString(),
@@ -32,14 +32,14 @@ namespace DB_man
             }
 
             try
-            {
+            {   //call function body
                 invocation.Proceed();
             }
             catch (Exception e)
             {
                 using (StreamWriter writer = File.AppendText(filePath))
                 {
-
+                    //log exceptions
                     writer.WriteLine("###Exception caught in {0}", invocation.Request.Target.GetType().ToString());
                     writer.WriteLine("Exception detail: {0}", e.ToString());
                     writer.WriteLine("Callstack detail: {0}", e.StackTrace.ToString());

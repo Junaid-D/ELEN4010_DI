@@ -16,6 +16,10 @@ using Ninject.Modules;
 
 namespace DB_man
 {
+    /// <summary>
+    /// Ninject module for type registrations related to news request classes
+    /// </summary>
+
     public class NewsModule : NinjectModule
     {
         public override void Load()
@@ -28,9 +32,16 @@ namespace DB_man
         }
     }
 
+    /// <summary>
+    /// Ninject module for type registrations related to DAL classes
+    /// </summary>
+
     public class DataAccessModule : NinjectModule
     {
+        //registry key that is present when access runtime is installed
         private string dbCheckString = "Microsoft.ACE.OLEDB.12.0";
+
+
         public override void Load()
         {
 
@@ -41,11 +52,11 @@ namespace DB_man
 
             RegistryKey accessRegKey = Registry.ClassesRoot.OpenSubKey(dbCheckString, false);
             //conditional check if access runtime is installed (USE CSV by default).
-            if (accessRegKey != null)
+            if (accessRegKey != null)//if access support is available.
             {
                 Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<MultiStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
                 Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SingleStoreSaver>().Intercept(context => true).With<ExceptionInterceptor>();
-                //retriever
+                
                 Bind<IDataAccess>().To<SqlDBAccess>().WhenInjectedInto<SimpleDataRetriever>().Intercept(context => true).With<ExceptionInterceptor>();
             }
             else
@@ -56,6 +67,10 @@ namespace DB_man
 
         }
     }
+
+    /// <summary>
+    /// Ninject module for type registrations related to analytics classes
+    /// </summary>
 
     public class AnalyticsModule : NinjectModule
     {

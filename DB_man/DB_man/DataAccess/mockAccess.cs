@@ -9,6 +9,9 @@ using NewsResponse;
 
 namespace DB_man.DataAccess
 {
+    /// <summary>
+    /// Implemets CRUD operations for mocking purposes. Currently not implemented and unused.
+    /// </summary>
     class MockAccess : IDataAccess
     {
 

@@ -8,6 +8,9 @@ using NewsResponse;
 using DB_man.RequestInterfaces;
 namespace DB_man.RequestClasses
 {
+    /// <summary>
+    /// Obtains news articles from multiple sources.
+    /// </summary>
     public class MultiNewsProvider : INewsProvider
     {
         private List<IRequestData> requesters_;

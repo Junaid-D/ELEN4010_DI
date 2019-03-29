@@ -10,13 +10,16 @@ using DataClasses;
 
 namespace DB_man.DataAccess
 {
+    /// <summary>
+    /// Implements CR(UD) operations on CSV files as a persistent store.
+    /// </summary>
     public class CsvAccess : IDataAccess
     {
         private string fileName_;
 
         public CsvAccess()
         {
-            fileName_ = System.Configuration.ConfigurationManager.ConnectionStrings["CSV"].ConnectionString;
+            fileName_ = System.Configuration.ConfigurationManager.ConnectionStrings["CSV"].ConnectionString;//fetch file name from config
         }
 
         public void Create(List<Article> articles)
@@ -30,7 +33,7 @@ namespace DB_man.DataAccess
                         if (item.Content != null)
                         {
                             var s = item.Content.Replace(Environment.NewLine, String.Empty);
-                            file.WriteLine("{0},{1},\"{2}\"", "0", DateTime.Now.ToString(), s);
+                            file.WriteLine("{0},{1},\"{2}\"", "0", DateTime.Now.ToString(), s);//store story with timestamp and ID
                         }
                     }
                     catch (Exception e)
@@ -42,7 +45,7 @@ namespace DB_man.DataAccess
         }
 
 
-        public void Delete()
+        public void Delete()//delete not currently needed within this application
         {
             throw new NotImplementedException();
         }
@@ -57,7 +60,7 @@ namespace DB_man.DataAccess
                     var line = "";
                     while ((line = reader.ReadLine()) != null)
                     {
-                        var lineContents = line.Split(',');
+                        var lineContents = line.Split(','); //split each line into fields
                         res.Add(new StoredArticle()
                         {
                             Id = Convert.ToInt32(lineContents[0]),
@@ -76,7 +79,7 @@ namespace DB_man.DataAccess
             return res;
         }
 
-        public void Update()
+        public void Update()//Update not currently needed within this application
         {
             throw new NotImplementedException();
         }

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace DataInterfaces
 {
+    /// <summary>
+    /// Exposes CRUD operations for NewsArticle persistent stores.
+    /// </summary>
     public interface IDataAccess
     {
         List<StoredArticle> Read();

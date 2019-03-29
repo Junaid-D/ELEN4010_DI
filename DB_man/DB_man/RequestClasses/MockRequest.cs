@@ -7,6 +7,9 @@ using DB_man.RequestInterfaces;
 using System.IO;
 namespace DB_man.RequestClasses
 {
+    /// <summary>
+    /// Obtains news JSON using static text file. For offline use or testing.
+    /// </summary>
     class MockRequest : IRequestData
     {
         private string file_;

@@ -7,7 +7,9 @@ using DB_man.RequestInterfaces;
 using NewsResponse;
 using DB_man.ResponseIntefaces;
 namespace DB_man.RequestClasses
-{
+{   /// <summary>
+    /// This class obtains news articles from a single source.
+    /// </summary>
 
     public class SingleNewsProvider : INewsProvider
     {

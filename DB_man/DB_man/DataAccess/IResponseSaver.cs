@@ -7,6 +7,9 @@ using NewsResponse;
 
 namespace DB_man.DataAccess
 {
+    /// <summary>
+    /// Responsible for storing stories in persistent storage.
+    /// </summary>
     interface IResponseSaver
     {
         void saveData(List<Article> toSave);

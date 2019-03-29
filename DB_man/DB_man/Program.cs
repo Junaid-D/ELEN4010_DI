@@ -19,15 +19,14 @@ namespace DB_man
     class Program
     {
 
-        static IKernel DefaultConfigure()
+        static IKernel DefaultConfigure() //registration of all bindings
         {
             return new StandardKernel(new NewsModule(), new DataAccessModule(), new AnalyticsModule());
-
         }
 
         static void Main(string[] args)
         {
-            IKernel kernel = DefaultConfigure();
+            IKernel kernel = DefaultConfigure();//composition root
 
 
             var newsProvider1 = kernel.Get<INewsProvider>();
@@ -63,7 +62,7 @@ namespace DB_man
             }
 
 
-            Console.WriteLine("News Powered by News API");
+            Console.WriteLine("News Powered by News API.. press any key to close");
             Console.ReadKey();
         }
     }

@@ -7,6 +7,9 @@ using NewsResponse;
 using DataInterfaces;
 namespace DB_man.DataAccess
 {
+    /// <summary>
+    /// Responsible for storing stories in a single persistent store.
+    /// </summary>
     class SingleStoreSaver : IResponseSaver
     {
         private IDataAccess acc_;

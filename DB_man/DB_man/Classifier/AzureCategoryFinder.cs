@@ -14,13 +14,18 @@ using System.Threading.Tasks;
 
 namespace DB_man.Classification
 {
+    /// <summary>
+    /// This is used for keyword analysis using the Azure text analytics API. This API is integrated via a NuGet package instead of using the RESTful API directly.
+    /// </summary>
 
     class ApiKeyServiceClientCredentials : ServiceClientCredentials
     {
-        private const string SubscriptionKey = "1d0968b7e974483a973ec6406209d0df";
+        private string subscriptionKey = "";
         public override Task ProcessHttpRequestAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            request.Headers.Add("Ocp-Apim-Subscription-Key", SubscriptionKey);
+            subscriptionKey= System.Configuration.ConfigurationManager.AppSettings["AnalyticsKey"].ToString();//fetch key from config
+
+            request.Headers.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
             return base.ProcessHttpRequestAsync(request, cancellationToken);
         }
     }
@@ -34,12 +39,14 @@ namespace DB_man.Classification
             List<string> res = new List<string>();
             ITextAnalyticsClient client = new TextAnalyticsClient(new ApiKeyServiceClientCredentials())
             {
-                Endpoint = "https://centralus.api.cognitive.microsoft.com"
+                Endpoint = "https://centralus.api.cognitive.microsoft.com"//azure services were registerd to centralus server.
             }; 
 
             var inputList = new List<MultiLanguageInput>();
+            //multilanguage input structure is needed despite all articles being in english, despite the out of date tutorial
 
             int i = 1;
+            //build argument list for keyword analysis
             foreach (string s in inputData)
             {
                 inputList.Add(new MultiLanguageInput("en", i.ToString(), s));
@@ -50,7 +57,7 @@ namespace DB_man.Classification
             {
                 KeyPhraseBatchResult result = client.KeyPhrasesAsync
                     (false, new MultiLanguageBatchInput(inputList)).Result;
-
+                //response from API
                 foreach (var document in result.Documents)
                 {
                     foreach (string keyphrase in document.KeyPhrases)
