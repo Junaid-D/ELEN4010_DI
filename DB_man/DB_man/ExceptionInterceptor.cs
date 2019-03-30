@@ -9,6 +9,9 @@ using System.IO;
 
 namespace DB_man
 {
+    /// <summary>
+    /// This class makes use of ninject interceptor functionality to log excepts and select function calls.
+    /// </summary>
     public class ExceptionInterceptor : IInterceptor
     {
         public ExceptionInterceptor()

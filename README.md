@@ -40,6 +40,8 @@ Ninject.Extensions.Interception.DynamicProxy
 .....
 ### The supplied App.Config file provided should be used, unless storage locations etc. are to be changed.
 
+### As an alternative, clone the repository at https://github.com/Junaid-D/ELEN4010_DI
+
 # Config
 
 Some aspects of the domain can be mocked to use some pre-stored versions of API responses, though this is not required. The application can be run without altering configuration.
