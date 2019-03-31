@@ -13,6 +13,8 @@ using DB_man.Classification;
 
 using Ninject.Extensions.Interception;
 using Ninject.Extensions.Interception.Infrastructure.Language;
+using DB_man.RequestClasses;
+using DB_man.Classifier;
 
 namespace DB_man
 {
@@ -29,10 +31,10 @@ namespace DB_man
             IKernel kernel = DefaultConfigure();//composition root
 
 
-            var newsProvider1 = kernel.Get<INewsProvider>();
+            var newsProvider1 = kernel.Get<NewsManager>();
 
             Console.WriteLine("Retrieving Stories...");
-            var apiRes = newsProvider1.GetArticles();
+            var apiRes = newsProvider1.fetchArticles();
             Console.WriteLine("Done Fetching");
 
             Console.WriteLine("Printing Stories...");
@@ -45,16 +47,16 @@ namespace DB_man
 
 
             Console.WriteLine("Saving Stories...");
-            var responseStorer = kernel.Get<IResponseSaver>("Multi");
-            responseStorer.saveData(apiRes);
+            var responseStorer = kernel.Get<StorySaver>();
+            responseStorer.saveStories(apiRes);
             Console.WriteLine("Done Saving");
 
             Console.WriteLine("Retrieving Stories from persistent store...");
 
-            var retriever = kernel.Get<IDataRetriever>();
-            var storedStories = retriever.getAllEntries();
+            var retriever = kernel.Get<StoryRetriever>();
+            var storedStories = retriever.getAllStories();
             Console.WriteLine("Analysing For Categories");
-            var analyser = kernel.Get<ICategoryFinder>();
+            var analyser = kernel.Get<TextAnalyser>();
             var listKeywords = analyser.getCategories(storedStories.Select(res => res.Content).ToList());
             foreach (var item in listKeywords)
             {

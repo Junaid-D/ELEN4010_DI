@@ -112,8 +112,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classifier\TextAnalyser.cs" />
     <Compile Include="DataAccess\IDataRetriever.cs" />
     <Compile Include="DataAccess\StoredArticle.cs" />
+    <Compile Include="DataAccess\StoryRetriever.cs" />
+    <Compile Include="DataAccess\StorySaver.cs" />
     <Compile Include="ExceptionInterceptor.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="Classifier\AzureCategoryFinder.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="RequestClasses\NewsApiResponse.cs" />
     <Compile Include="RequestClasses\IRequestData.cs" />
     <Compile Include="RequestClasses\MockRequest.cs" />
+    <Compile Include="RequestClasses\NewsManager.cs" />
     <Compile Include="RequestClasses\SingleNewsProvider.cs" />
     <Compile Include="RequestClasses\BBCNews.cs" />
   </ItemGroup>

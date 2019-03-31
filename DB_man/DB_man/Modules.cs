@@ -27,7 +27,7 @@ namespace DB_man
             Bind<IRequestData>().To<GoogleNews>().WhenInjectedInto<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IRequestData>().To<BBCNews>().WhenInjectedInto<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
             Bind<IRequestData>().To<MockRequest>().WhenInjectedInto<SingleNewsProvider>();
-            Bind<INewsProvider>().To<MultiNewsProvider>().Intercept(context => true).With<ExceptionInterceptor>();
+            Bind<INewsProvider>().To<MultiNewsProvider>().Named("MultiNews").Intercept(context => true).With<ExceptionInterceptor>();
 
         }
     }

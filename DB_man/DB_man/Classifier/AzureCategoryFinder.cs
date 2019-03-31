@@ -50,11 +50,11 @@ namespace DB_man.Classification
             foreach (string s in inputData)
             {
                 inputList.Add(new MultiLanguageInput("en", i.ToString(), s));
-                i++;
-
+                i++;//each input needs an id
             }
             try
             {
+                //ignore stats
                 KeyPhraseBatchResult result = client.KeyPhrasesAsync
                     (false, new MultiLanguageBatchInput(inputList)).Result;
                 //response from API
